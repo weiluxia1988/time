@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+  </head>
+  <body>
+    <div id="show"><div>
+    <script type="text/javascript">
+      var show = document.getElementById('show');
+      var startTime = 80000;
+      var timeSpan = 1;
+      var currentTime;
+      start();
+
+      function now() {
+        return +new Date();
+      }
+
+      function start() {
+        currentTime = now();
+        loop();
+      }
+
+      function loop() {
+        currentTime += timeSpan;
+        startTime -= timeSpan;
+        var nTime = now();
+        var duration = currentTime - nTime; 
+        while(duration < 0) {
+          currentTime += timeSpan;
+          startTime -= timeSpan;
+          duration = currentTime - nTime; 
+        }
+        if (startTime < 0) {
+          show.innerHTML = 0;
+          return;
+        }
+        show.innerHTML = startTime;
+        setTimeout(function() {
+          loop();
+        }, duration);
+      }
+    </script>
+  </body>
+</html>
